@@ -1,0 +1,90 @@
+<Window x:Class="GakunguWater.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gakungu Community Water Project" Height="700" Width="1100"
+        WindowStartupLocation="CenterScreen" MinHeight="600" MinWidth="900"
+        WindowState="Maximized" Background="{StaticResource PageBgBrush}"
+        Icon="pack://application:,,,/Assets/logo.png">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ══════════════ SIDEBAR ══════════════ -->
+        <Grid Grid.Column="0" Background="{StaticResource SidebarBgBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Logo Area -->
+            <Border Grid.Row="0" Padding="16,24,16,16">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <Image Source="/Assets/logo.png" Width="36" Height="36" Margin="0,0,12,0"/>
+                        <TextBlock Text="Gakungu Water" Foreground="White"
+                                   FontSize="15" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <TextBlock Text="Management System" Foreground="#8FB3D1" FontSize="11"/>
+                    <Separator Background="#1E425C" Margin="0,12,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Navigation Buttons -->
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="MAIN" Foreground="#4A6F8A" FontSize="10"
+                           Margin="20,12,0,4" FontWeight="SemiBold"/>
+                <Button x:Name="BtnDashboard"    Content="📊  Dashboard"     Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Dashboard"/>
+                <Button x:Name="BtnCustomers"    Content="👥  Customers"     Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Customers"/>
+                <Button x:Name="BtnReadings"     Content="📋  Meter Readings" Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Readings"/>
+                <Button x:Name="BtnInvoices"     Content="🧾  Invoices"       Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Invoices"/>
+
+                <TextBlock Text="FINANCE" Foreground="#4A6F8A" FontSize="10"
+                           Margin="20,16,0,4" FontWeight="SemiBold"/>
+                <Button x:Name="BtnPayments"     Content="💵  Payments"      Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Payments"/>
+                <Button x:Name="BtnDefaulters"   Content="⚠️  Defaulters"    Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Defaulters"/>
+                <Button x:Name="BtnExpenses"     Content="📉  Expenses"      Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Expenses"/>
+                <Button x:Name="BtnFinance"      Content="📈  Finance Report" Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Finance"/>
+
+                <TextBlock x:Name="AdminSection" Text="ADMIN" Foreground="#4A6F8A" FontSize="10"
+                           Margin="20,16,0,4" FontWeight="SemiBold"/>
+                <Button x:Name="BtnTariffs"      Content="⚙️  Tariffs"       Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Tariffs"/>
+                <Button x:Name="BtnUsers"        Content="🔑  Users"         Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Users"/>
+                <Button x:Name="BtnBackup"       Content="💾  Backup"        Style="{StaticResource NavButton}" Click="Nav_Click" Tag="Backup"/>
+            </StackPanel>
+
+            <!-- User Info + Logout -->
+            <Border Grid.Row="2" Padding="16,12">
+                <StackPanel>
+                    <Separator Background="#1E425C" Margin="0,0,0,12"/>
+                    <TextBlock x:Name="TxtCurrentUser" Foreground="#B0C4DE" FontSize="11" TextWrapping="Wrap"/>
+                    <Button Content="🚪  Logout" Style="{StaticResource NavButton}"
+                            Padding="4,8" Click="BtnLogout_Click" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- ══════════════ CONTENT AREA ══════════════ -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="28"/>
+            </Grid.RowDefinitions>
+
+            <!-- Page Host -->
+            <Frame x:Name="FrameContent" Grid.Row="0" NavigationUIVisibility="Hidden"
+                   Background="{StaticResource PageBgBrush}"/>
+
+            <!-- Status Bar -->
+            <Border Grid.Row="1" Background="{StaticResource PrimaryBrush}" Padding="12,0">
+                <DockPanel>
+                    <TextBlock x:Name="TxtStatus" Foreground="#B0C4DE" FontSize="11" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TxtDateTime" Foreground="#B0C4DE" FontSize="11"
+                               VerticalAlignment="Center" DockPanel.Dock="Right"/>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

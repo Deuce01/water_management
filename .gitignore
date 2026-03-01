@@ -1,0 +1,32 @@
+## Visual Studio and .NET Core Ignored Files
+.vs/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Output Directories (Gakungu Water Specific)
+Publish/
+Installer/
+*.zip
+
+## SQLite Database Files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+GakunguWater_*.db
+
+## Local environments and secrets
+appsettings.Development.json
+appsettings.local.json
+.vscode/
+
+## Mac / OS Specific
+.DS_Store
+Thumbs.db

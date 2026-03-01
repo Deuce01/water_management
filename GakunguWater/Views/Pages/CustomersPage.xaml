@@ -1,0 +1,76 @@
+<Page x:Class="GakunguWater.Views.Pages.CustomersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Customers" Background="{StaticResource PageBgBrush}">
+    <Grid Margin="28,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <DockPanel Grid.Row="0" LastChildFill="False" Margin="0,0,0,16">
+            <TextBlock Text="👥 Customer Management" Style="{StaticResource PageTitle}" DockPanel.Dock="Left" Margin="0"/>
+            <Button x:Name="BtnAdd" Content="+ Add Customer" Style="{StaticResource PrimaryButton}" DockPanel.Dock="Right"
+                    Click="BtnAdd_Click"/>
+        </DockPanel>
+
+        <!-- Filters -->
+        <Border Grid.Row="1" Style="{StaticResource Card}" Padding="12">
+            <WrapPanel>
+                <TextBox x:Name="TxtSearch" Style="{StaticResource TextInput}" Width="250"
+                         Text="" Tag="Search by name, phone, location..."
+                         Margin="0,0,12,0" TextChanged="TxtSearch_TextChanged"/>
+                <ComboBox x:Name="CboStatus" Width="160" SelectionChanged="CboStatus_SelectionChanged"
+                          Margin="0,0,12,0">
+                    <ComboBoxItem Content="All Statuses" IsSelected="True" Tag=""/>
+                    <ComboBoxItem Content="✅ Active"       Tag="Active"/>
+                    <ComboBoxItem Content="⏸ Suspended"   Tag="Suspended"/>
+                    <ComboBoxItem Content="❌ Disconnected" Tag="Disconnected"/>
+                </ComboBox>
+                <Button Content="🔄 Refresh" Style="{StaticResource OutlineButton}" Click="BtnRefresh_Click"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- Data Grid -->
+        <Border Grid.Row="2" Style="{StaticResource Card}" Padding="0">
+            <DataGrid x:Name="GridCustomers" IsReadOnly="True" SelectionChanged="GridCustomers_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID"        Binding="{Binding Id}"           Width="50"/>
+                    <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"      Width="*"/>
+                    <DataGridTextColumn Header="Phone"     Binding="{Binding PhoneNumber}"   Width="120"/>
+                    <DataGridTextColumn Header="Location"  Binding="{Binding Location}"      Width="140"/>
+                    <DataGridTextColumn Header="Meter No"  Binding="{Binding MeterNumber}"   Width="100"/>
+                    <DataGridTemplateColumn Header="Status" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource StatusBadge}"
+                                        Background="{Binding ConnectionStatus, Converter={StaticResource StatusToBrush}}">
+                                    <TextBlock Text="{Binding ConnectionStatus}" Foreground="White" FontSize="11" FontWeight="SemiBold"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Balance (KES)" Binding="{Binding OutstandingBalance, StringFormat=N2}" Width="110"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Action Buttons -->
+        <WrapPanel Grid.Row="3" Margin="0,8,0,0">
+            <Button Content="✏️ Edit" Style="{StaticResource OutlineButton}" Margin="0,0,8,0" Click="BtnEdit_Click" x:Name="BtnEdit" IsEnabled="False"/>
+            <Button Content="📱 Add/Edit Meter" Style="{StaticResource OutlineButton}" Margin="0,0,8,0" Click="BtnMeter_Click" x:Name="BtnMeter" IsEnabled="False"/>
+            <Button Content="✅ Set Active" Style="{StaticResource SuccessButton}" Margin="0,0,8,0" Click="BtnActive_Click" x:Name="BtnActive" IsEnabled="False"/>
+            <Button Content="⏸ Suspend" Style="{StaticResource DangerButton}" Margin="0,0,8,0" Click="BtnSuspend_Click" x:Name="BtnSuspend" IsEnabled="False"/>
+            <TextBlock x:Name="TxtCount" VerticalAlignment="Center" FontSize="12"
+                       Foreground="{StaticResource TextSecondaryBrush}" Margin="8,0,0,0"/>
+        </WrapPanel>
+        <!-- Busy indicator -->
+        <TextBlock x:Name="BusyIndicator" Text="⏳ Loading…" FontSize="16" Panel.ZIndex="10"
+                   Grid.RowSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Foreground="{StaticResource PrimaryBrush}" Visibility="Collapsed"/>
+    </Grid>
+</Page>
+

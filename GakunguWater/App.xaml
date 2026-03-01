@@ -1,0 +1,17 @@
+﻿<Application x:Class="GakunguWater.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:helpers="clr-namespace:GakunguWater.Helpers"
+             StartupUri="Views/LoginWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:StatusToBrushConverter x:Key="StatusToBrush"/>
+            <helpers:InvoiceStatusToBrushConverter x:Key="InvoiceStatusToBrush"/>
+            <helpers:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
+            <helpers:MonthYearConverter x:Key="MonthYearConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

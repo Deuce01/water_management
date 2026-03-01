@@ -1,0 +1,46 @@
+<Window x:Class="GakunguWater.Views.Dialogs.PaymentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Log Payment" Width="380" SizeToContent="Height" MaxHeight="700"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource PageBgBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="💵 Log Cash Payment" Style="{StaticResource PageTitle}" FontSize="16"/>
+            <TextBlock x:Name="TxtInvoiceInfo" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Amount (KES) *" Style="{StaticResource LabelText}"/>
+            <TextBox x:Name="TxtAmount" Style="{StaticResource TextInput}" Margin="0,0,0,12"/>
+
+            <TextBlock Text="Payment Method" Style="{StaticResource LabelText}"/>
+            <ComboBox x:Name="CboMethod" Margin="0,0,0,12" SelectionChanged="CboMethod_Changed">
+                <ComboBoxItem Content="Cash" IsSelected="True"/>
+                <ComboBoxItem Content="MPesa"/>
+            </ComboBox>
+
+            <StackPanel x:Name="PanelMpesa" Visibility="Collapsed">
+                <TextBlock Text="M-Pesa Reference" Style="{StaticResource LabelText}"/>
+                <TextBox x:Name="TxtMpesaRef" Style="{StaticResource TextInput}" Margin="0,0,0,12"/>
+            </StackPanel>
+
+            <TextBlock Text="Notes" Style="{StaticResource LabelText}"/>
+            <TextBox x:Name="TxtNotes" Height="50" TextWrapping="Wrap" AcceptsReturn="True"
+                     BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="8,4" FontSize="13"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Cancel" Style="{StaticResource OutlineButton}" Width="80" Margin="0,0,10,0" Click="BtnCancel_Click"/>
+            <Button x:Name="BtnSave" Content="✅ Post Payment" Style="{StaticResource SuccessButton}" Width="120" Click="BtnSave_Click"/>
+        </StackPanel>
+    </Grid>
+    </ScrollViewer>
+</Window>
